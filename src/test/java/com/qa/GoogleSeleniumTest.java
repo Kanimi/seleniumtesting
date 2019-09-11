@@ -8,6 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 public class GoogleSeleniumTest {
@@ -46,6 +48,7 @@ public class GoogleSeleniumTest {
         addValues.click();
         Thread.sleep(3000);
 
+//        FIRST SELENIUM FOR GOOGLE IMAGES
 //        driver.get("http://google.com");
 //        Thread.sleep(2000);
 //        WebElement searchField = driver.findElement(By.name("q"));
@@ -61,5 +64,25 @@ public class GoogleSeleniumTest {
 //        JavascriptExecutor jse = (JavascriptExecutor)driver;
 //        jse.executeScript("window.scrollBy(0,500)");
 //        Thread.sleep(5000);
+    }
+
+    @Test
+    public void checkboxTest() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://www.seleniumeasy.com/test/basic-checkbox-demo.html");
+        Thread.sleep(2000);
+        WebElement ageCheckbox = driver.findElement(By.id("isAgeSelected"));
+        ageCheckbox.click();
+        Thread.sleep(3000);
+        List<WebElement> cb = driver.findElements(By.className("cb1-element"));
+        for (WebElement el:cb) {
+            el.click();
+            Thread.sleep(500);
+        }
+//      page is broken, the "Check All" button changes values on the 3rd option being clicked
+        Thread.sleep(1000);
+        WebElement checkAll = driver.findElement(By.id("check1"));
+        checkAll.click();
+        Thread.sleep(2000);
     }
 }
