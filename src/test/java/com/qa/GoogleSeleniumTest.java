@@ -26,7 +26,7 @@ public class GoogleSeleniumTest {
     }
 
     @Test
-    public void searchTest() throws InterruptedException {
+    public void simpleformTest() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://www.seleniumeasy.com/test/basic-first-form-demo.html");
         Thread.sleep(2000);
@@ -45,8 +45,6 @@ public class GoogleSeleniumTest {
         WebElement addValues = driver.findElement(By.id("gettotal")).findElement(By.tagName("button"));
         addValues.click();
         Thread.sleep(3000);
-
-
 
 //        driver.get("http://google.com");
 //        Thread.sleep(2000);
