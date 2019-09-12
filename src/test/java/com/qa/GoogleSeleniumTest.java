@@ -109,6 +109,9 @@ public class GoogleSeleniumTest {
             for (WebElement j:ageGroup){
                 i.click();
                 j.click();
+                WebElement getvalues = driver.findElementByXPath("//*[@id=\"easycont\"]/div/div[2]/div[2]/div[2]/button");
+                getvalues.click();
+                Thread.sleep(500);
             }
         }
     }
