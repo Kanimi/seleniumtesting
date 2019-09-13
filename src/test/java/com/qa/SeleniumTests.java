@@ -3,27 +3,27 @@ package com.qa;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.Select;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class GoogleSeleniumTest {
+public class SeleniumTests {
 
     private ChromeDriver driver;
 
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\seleniumtesting\\src\\test\\java\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\kanim\\Dropbox\\Selenium\\src\\test\\java\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -32,6 +32,23 @@ public class GoogleSeleniumTest {
     public void tearDown(){
         driver.close();
     }
+
+    //        FIRST SELENIUM FOR GOOGLE IMAGES
+//        driver.get("http://google.com");
+//        Thread.sleep(2000);
+//        WebElement searchField = driver.findElement(By.name("q"));
+//        assertTrue(searchField.isDisplayed());
+//        searchField.sendKeys("marble fox pictures");
+//        Thread.sleep(3000);
+//        WebElement submitButton = driver.findElement(By.name("btnK"));
+//        submitButton.click();
+//        Thread.sleep(3000);
+//        WebElement linkToBiggerPicture = driver.findElementByLinkText("Images for marble fox");
+//        linkToBiggerPicture.click();
+//        Thread.sleep(1000);
+//        JavascriptExecutor jse = (JavascriptExecutor)driver;
+//        jse.executeScript("window.scrollBy(0,500)");
+//        Thread.sleep(5000);
 
     @Test
     public void simpleformTest() throws InterruptedException {
@@ -52,23 +69,6 @@ public class GoogleSeleniumTest {
         WebElement addValues = driver.findElement(By.id("gettotal")).findElement(By.tagName("button"));
         addValues.click();
         Thread.sleep(3000);
-
-//        FIRST SELENIUM FOR GOOGLE IMAGES
-//        driver.get("http://google.com");
-//        Thread.sleep(2000);
-//        WebElement searchField = driver.findElement(By.name("q"));
-//        assertTrue(searchField.isDisplayed());
-//        searchField.sendKeys("marble fox pictures");
-//        Thread.sleep(3000);
-//        WebElement submitButton = driver.findElement(By.name("btnK"));
-//        submitButton.click();
-//        Thread.sleep(3000);
-//        WebElement linkToBiggerPicture = driver.findElementByLinkText("Images for marble fox");
-//        linkToBiggerPicture.click();
-//        Thread.sleep(1000);
-//        JavascriptExecutor jse = (JavascriptExecutor)driver;
-//        jse.executeScript("window.scrollBy(0,500)");
-//        Thread.sleep(5000);
     }
 
     @Test
@@ -135,7 +135,7 @@ public class GoogleSeleniumTest {
     }
 
     @Test
-    public void inputFormSubmitTest() throws InterruptedException {
+    public void inputFormSubmitTest() throws InterruptedException, IOException {
         driver.get("https://www.seleniumeasy.com/test/input-form-demo.html");
         Thread.sleep(2000);
         WebElement first_name = driver.findElement(By.xpath("//*[@id=\"contact_form\"]/fieldset/div[1]/div/div/input"));
@@ -169,7 +169,7 @@ public class GoogleSeleniumTest {
         zip.sendKeys("W3 3D");
         Thread.sleep(500);
         JavascriptExecutor jse = (JavascriptExecutor)driver;
-        jse.executeScript("window.scrollBy(0,500)");
+        jse.executeScript("window.scrollBy(0,200)");
         WebElement site = driver.findElementByXPath("//*[@id=\"contact_form\"]/fieldset/div[9]/div/div/input");
         site.click();
         site.sendKeys("cornhub.com");
@@ -184,6 +184,8 @@ public class GoogleSeleniumTest {
         desc.click();
         desc.sendKeys("Form fullfilment");
         Thread.sleep(2000);
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileHandler.copy(scrFile, new File("C:\\Users\\kanim\\Dropbox\\Selenium\\src\\test\\java\\screenshots\\inputFormSubmitTest.png"));
         WebElement send = driver.findElementByXPath("//*[@id=\"contact_form\"]/fieldset/div[13]/div/button");
         send.click();
         Thread.sleep(1000);
